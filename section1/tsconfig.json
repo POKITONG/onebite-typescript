@@ -1,0 +1,33 @@
+{
+
+  // 타입스크립트를 자바스크립트로 변환하는 과정이나, 타입 검사 등
+  // 컴파일 관련 옵션들은 compilerOptions 내부에 설정
+  "compilerOptions": {
+    "skipLibCheck": true,
+    // 타입 정의 파일의 타입 검사 생략 여부 설정
+    "target": "ESNext",
+    // 컴파일 결과 생성되는 JS 파일의 버전
+    // ESNext: 자바스크립트 최신 버전
+    // 옛날 자바스크립트 버전을 사용하는 구형 웹브라우저, 프로젝트에서 사용
+    "module": "ESNext",
+    // 모듈 옵션 설정
+    "outDir": "dist",
+    // 컴파일 결과가 생성되는 코드 위치 설정
+    "strict": false,
+    // strict : 엄격한 타입 설정
+    "moduleDetection": "force",
+    // 타입스크립트가 각각의 파일을 어떤 어떤 모듈로 감지할 것인지 결정하는 옵션
+    // force 로 설정해주면 컴파일된 자바스크립트 파일에 각각 export{}; 키워드가 추가돼서 생성
+    // module 설정에 따라서 추가되는 모듈 키워드가 달라짐
+
+  },
+
+  // ts-node 는 common.js 를 사용하는 것이 default 이기 때문에 다른 모듈을 사용하게 하려면
+  // 개별 설정 필요
+  "ts-node": {
+    "esm": true
+  },
+
+  "include": ["src"],
+  // 해당 디렉토리 내부의 파일들을 전부 컴파일
+}
