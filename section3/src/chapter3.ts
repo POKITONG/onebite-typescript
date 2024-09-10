@@ -1,71 +1,95 @@
 /**
- * unknown 타입
+ * 기본 타입간의 호환성
  */
 
-function unknownExam() {
-    let a: unknown = 1;
-    let b: unknown = "hello";
-    let c: unknown = true;
-    let d: unknown = null;
-    let e: unknown = undefined;
+let num1: number = 10;
+let num2: 10 = 10;
 
-    let unknowVar: unknown;
-
-    // let num: number = unknowVar;
-    // let str: string = unknowVar;
-    // let bool: boolean = unknowVar;
-
-}
+num1 = num2;
+// num2 = num1;
 
 /**
- * Never 타입 -> 공집합
+ * 객체 타입간의 호환성
+ * -> 어떤 객체타입을 다른 객체타입으로 취급해도 괜찮은가?
  */
 
-function neverExam() {
-    function neverFunc(): never {
-        while (true) {}
-    }
-
-    let num: number = neverFunc();
-    let str: string = neverFunc();
-    let bool: boolean = neverFunc();
-
-    // let never1: never = 10;
-    // let never2: never = "string";
-    // let never3: never = true;
-
+type Animal = {
+    name: string;
+    color: string;
 }
+
+type Dog = {
+    name: string;
+    color: string;
+    breed: string;
+}
+
+let animal: Animal = {
+    name: "기린",
+    color: "yellow"
+}
+
+let dog: Dog = {
+    name: "돌돌이",
+    color: "brown",
+    breed: "진도",
+};
+
+animal = dog;
+
+// dog = animal;
+
+// 객체 타입들은 property 를 기준으로 슈퍼서브타입 관계를 가진다.
+// 타입스크립트는 property 를 기준으로 타입을 정의하는 구조적 타입 시스템을 가진다.
+
+
+type ProgrammingBook = {
+    name: string;
+    price: number;
+    skill: string;
+}
+
+let book: Book;
+let programingBook: ProgrammingBook = {
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    skill: "reactjs",
+};
+
+book = programingBook;
+// programingBook = book;
 
 /**
- * void 타입
+ * 초과 프로퍼티 검사
  */
 
-function voidExam() {
-    function voidFunc(): void {
-        console.log("hi");
-        return undefined; // -> undefined 타입의 슈퍼타입이기 때문에 리턴 가능
-    }
-}
+type Book = {
+    name: string;
+    price: number;
+};
 
-let voidVar: void = undefined;
+let book2: Book = {
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    // skill: "reactjs",
+};
 
-/**
- * any
- * 모든 타입의 슈퍼 타입이자 서브 타입 -> 네버 제외 (치트키)
- */
+// 변수를 초기화할 때 초기화하는 값으로 객체 리터럴을 사용하면 발동하는 검사
+// 객체 타입 변수를 초기화할 때 객체 리터럴을 사용하면 실제 타입에는 정의해놓지 않은 초과 프로퍼티르 작성하면
+// 안 되도록 막는다.
 
-function anyExam() {
-    let unknownVar: unknown;
-    let anyVar: any;
-    let undefinedVar: undefined;
-    let neverVar: never;
+let book3: Book = programingBook;
 
-    anyVar = unknownVar;
-    // anyType 한정으로 unknown 타입도 any 타입으로 다운캐스팅 가능
+function func(book: Book) {}
+func({
+    name: "한 입 크기로 잘라먹는 리액트",
+    price: 33000,
+    // skill: "reactjs",
+})
 
-    undefinedVar = anyVar;
-    // any 타입은 본인에게 하는 다운캐스팅, 본인이 하는 다운캐스팅 전부 가능
-    // 위험하기 때문에 웬만해서는 사용 X
+// 함수를 정의하고 함수의 인수로 객체 리터럴을 전달하면 초과프로퍼티 검사가 발동한다.
 
-    // neverVar = anyVar;
-}
+func(programingBook);
+
+// 서브타입 객체를 넣을 때는 객체 리터럴 사용X
+// 변수에 저장 후 인수로 전달
