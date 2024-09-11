@@ -32,7 +32,7 @@ interface Chicken extends Animal {
 interface DogCat extends Dog, Cat {}
 
 const dogCat: DogCat = {
-    name: "",
+    name: "hello",
     color: "",
     isBark: true,
     isScratch: true,
