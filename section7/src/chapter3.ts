@@ -99,5 +99,3 @@ const studentUser: User<Student> = {
         school: "가톨릭대학교",
     },
 };
-
-
