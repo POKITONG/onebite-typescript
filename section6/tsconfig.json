@@ -7,6 +7,8 @@
     "strict": true,
     "allowJs": true,
     // 자바스크립트도 허용해주는 설정
+     "noImplicitAny": true,
+    // 암시적 any 를 허용하지 않을 것인지 설정하는 옵션
   },
   "ts-node": {
     "esm": true,
