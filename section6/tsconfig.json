@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "allowJs": true,
+    // 자바스크립트도 허용해주는 설정
+  },
+  "ts-node": {
+    "esm": true,
+  },
+  "include": ["src"]
+}
