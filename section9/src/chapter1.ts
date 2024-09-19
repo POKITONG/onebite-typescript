@@ -4,7 +4,7 @@
  */
 
 
-type StringNumberSwitch<T> = [T] extends [number] ? string : nubmer;
+type StringNumberSwitch<T> = [T] extends [number] ? string : number;
 
 let a: StringNumberSwitch<number>;
 
